@@ -1,0 +1,136 @@
+@use "../../index";
+
+.card-container {}
+
+.card-wrapper {
+  @include index.input-focus;
+
+  position: relative;
+  display: block;
+  padding-top: 73.74%;
+  margin: 1.1rem;
+
+  &:hover {
+    .card {
+      box-shadow: 0 1px 16px rgba(0, 0, 0, 0.15);
+
+      @include index.min-tablet {
+        top: -10px;
+
+        .card-details {
+          height: 40%;
+        }
+      }
+    }
+  }
+
+  @include index.max-mobile {
+    padding-top: 90%;
+    margin: 0 0 1rem 0;
+  }
+}
+
+.card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  border-radius: 0.3em;
+  box-shadow: 0 4px 24px #00000014;
+  overflow: hidden;
+
+  &.--action {
+    &:hover {
+      top: 0;
+    }
+  }
+}
+
+.card-image, .card-action {
+  height: 100%;
+  width: 100%;
+}
+
+.card-details {
+  position: absolute;
+  height: 27%;
+  width: 100%;
+  bottom: 0;
+  padding: 0 10%;
+  box-sizing: border-box;
+  background-color: index.$color-bg-light-tinted;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  transition: height index.$hover-transition-style;
+
+  @include index.max-tablet {
+    height: 35%;
+  }
+}
+
+.card-name {
+  @include index.text-style-normal;
+  color: index.$color-text-dark-strong;
+  max-height: 2em;
+  word-break: break-word;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.card-description {
+  @include index.text-style-normal;
+  color: index.$color-text-dark-strong;
+  text-transform: none;
+  font-weight: 400;
+  position: relative;
+  top: 0.25em;
+  margin: 0;
+
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height index.$hover-transition-style;
+
+  @include index.max-tablet {
+    top: 0.15em;
+    max-height: none !important;
+  }
+}
+
+.card-action {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+
+  color: index.$color-text-dark-strong;
+  fill: index.$color-text-dark-strong;
+
+  transition: background-color index.$hover-transition-style;
+
+  &:hover {
+    top: 0;
+    background-color: index.$color-bg-light-tinted;
+  }
+}
+
+.card-action-icon {
+  color: index.$color-text-dark-normal;
+}
+
+.card-action-name {
+  @extend .card-name;
+  color: index.$color-text-dark-strong;
+  margin-top: 0.95em;
+}
