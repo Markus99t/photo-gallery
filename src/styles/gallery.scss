@@ -1,0 +1,51 @@
+@use "./variables.scss" as *;
+
+body {
+  font-family: "Barlow", sans-serif;
+  margin: 0 10% 5%;
+}
+
+.gallery-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.gallery-header {
+  margin: 2rem 1rem 1.3rem;
+
+  h1 {
+    @include text-style-header;
+    color: $color-text-dark-strong;
+  }
+
+  h2 {
+    @include text-style-normal;
+    color: $color-text-dark-strong;
+  }
+
+  nav {
+    display: inline-block;
+
+    a {
+      @include input-focus;
+      display: flex;
+      align-items: center;
+    }
+
+    .icon {
+      color: $color-text-dark-strong;
+      margin-right: 1em;
+      width: 1.25em;
+    }
+  }
+}
+
+.gallery-cardList {
+  position: relative;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  grid-auto-rows: 300px;
+}

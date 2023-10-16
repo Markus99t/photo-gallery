@@ -1,37 +1,16 @@
 body {
   font-family: "Barlow", sans-serif;
-  margin: 0;
+  margin: 0 10% 5%;
 }
 
 .gallery-container {
-  position: relative;
-}
-
-.gallery {
   display: flex;
   flex-direction: column;
-  width: 83rem;
-  margin: 0 auto;
-}
-@media (max-width: 1260px) {
-  .gallery {
-    width: 62.8rem;
-  }
-}
-@media (max-width: 990px) {
-  .gallery {
-    width: 41.8rem;
-  }
-}
-@media (max-width: 760px) {
-  .gallery {
-    width: 100%;
-  }
+  width: 100%;
 }
 
 .gallery-header {
-  margin: 5rem 1rem 1.3rem;
-  color: black;
+  margin: 2rem 1rem 1.3rem;
 }
 .gallery-header h1 {
   color: inherit;
@@ -52,11 +31,6 @@ body {
   margin: 0.7em 0;
   color: #000000;
 }
-@media (max-width: 760px) {
-  .gallery-header h2 {
-    font-size: 1rem;
-  }
-}
 .gallery-header nav {
   display: inline-block;
 }
@@ -71,36 +45,17 @@ body {
 }
 .gallery-header nav .icon {
   color: #000000;
-  width: 1.25em;
   margin-right: 1em;
+  width: 1.25em;
 }
 
 .gallery-cardList {
-  display: flex;
-  flex-wrap: wrap;
-}
-.gallery-cardList > * {
-  flex-basis: 25%;
-}
-@media (max-width: 1260px) {
-  .gallery-cardList > * {
-    flex-basis: 33%;
-  }
-}
-@media (max-width: 990px) {
-  .gallery-cardList > * {
-    flex-basis: 50%;
-  }
-}
-@media (max-width: 760px) {
-  .gallery-cardList > * {
-    flex-basis: 45%;
-  }
-}
-@media (max-width: 760px) {
-  .gallery-cardList {
-    justify-content: space-evenly;
-  }
+  position: relative;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  grid-auto-rows: 300px;
 }
 
 /*# sourceMappingURL=gallery.css.map */

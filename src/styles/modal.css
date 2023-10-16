@@ -1,0 +1,73 @@
+.modal {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background-color: white;
+  border-radius: 1rem;
+  border-width: 0;
+  padding: 0;
+}
+.modal[open] {
+  animation: show 250ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.modal[open].modal--closing {
+  animation: hide 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.modal::backdrop {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(51, 51, 51, 0.3);
+  backdrop-filter: blur(1px);
+  animation: none;
+}
+.modal .modal-container {
+  display: flex;
+  flex-direction: column;
+}
+.modal .modal-container .modal-close-button {
+  position: fixed;
+  top: 0.5rem;
+  right: 0.2rem;
+}
+.modal .modal-container .modal-photo-previous {
+  position: fixed;
+  top: 50%;
+}
+.modal .modal-container .modal-photo-next {
+  position: fixed;
+  right: 0;
+  top: 50%;
+}
+.modal .modal-template {
+  padding: 1rem;
+  width: 30vw;
+}
+.modal .modal-template .modal-template-title {
+  padding-bottom: 1rem;
+}
+.modal .modal-template h3 {
+  margin: 0;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    transform: translateY(min(100px, 5vh));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+@keyframes hide {
+  from {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(min(100px, 5vh));
+  }
+}
+
+/*# sourceMappingURL=modal.css.map */
