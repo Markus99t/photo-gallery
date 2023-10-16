@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Modal, { ModalTemplate } from "../Modal";
-import { TextField, Alert, IconButton } from "@mui/material";
+import { TextField, Alert } from "@mui/material";
 
 import "../../styles/modal/addCategory.scss";
 import axios from "axios";
 import InputButton from "../inputs/InputButton";
-import CloseIcon from "@mui/icons-material/Close";
 
 const url = "http://api.programator.sk";
 
@@ -32,7 +31,7 @@ function AddCategory({ open, onClose, onAdded }) {
 
     await axios
       .post(url + "/gallery", { name: nameTrimmed })
-      .then((res) => {
+      .then(() => {
         onClose();
         onAdded();
       })

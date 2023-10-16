@@ -75,7 +75,7 @@ function AddPhoto({ open, onClose, onAdded }) {
             break;
         }
       }),
-    ).then((res) => {
+    ).then(() => {
       onClose();
       onAdded();
     });

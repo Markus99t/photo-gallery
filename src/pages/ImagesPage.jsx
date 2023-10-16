@@ -13,7 +13,6 @@ import { setCategory } from "../utils/redux/gallerySlice";
 const url = "http://api.programator.sk";
 
 function ImagesPage() {
-  const [images, setImages] = useState([]);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showPhotoModal, setShowPhotoModal] = useState(false);
   const [modalImageUrl, setModalImageUrl] = useState("");
