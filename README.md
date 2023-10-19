@@ -3,7 +3,7 @@
 ## To run project, follow these steps:
 
 ### 1. Install dependencies
-Use the `npm install` command, or its short equivalent `npm i`, to install all the necessary packages listed in the `package.json` file.
+Use the `npm install` command, or it's short equivalent `npm i`, to install all the necessary packages listed in the `package.json` file.
 
 ### 2. Start the development server:
 
