@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Modal, { ModalTemplate } from "../Modal";
 import { TextField, Alert } from "@mui/material";
 
 import "../../styles/modal/addCategory.scss";
 import axios from "axios";
 import InputButton from "../inputs/InputButton";
-
-const url = "http://api.programator.sk";
+import { UrlContext } from "../../App";
 
 function AddCategory({ open, onClose, onAdded }) {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [showError, setShowError] = useState(false);
+
+  const url = useContext(UrlContext);
 
   function handleChange(e) {
     const { value } = e.target;
@@ -39,7 +40,7 @@ function AddCategory({ open, onClose, onAdded }) {
         console.error(err);
         switch (err.response.status) {
           case 409:
-            setError("Error_409 - Názov už existuje!");
+            setError("Názov už existuje!");
             setShowError(true);
             break;
           case 400:
@@ -49,6 +50,8 @@ function AddCategory({ open, onClose, onAdded }) {
           case 500:
             setError("Error_500");
             setShowError(true);
+            break;
+          default:
             break;
         }
       });

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Gallery from "../components/Gallery";
 import Card from "../components/Card";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,8 +9,7 @@ import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRou
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../utils/redux/gallerySlice";
-
-const url = "http://api.programator.sk";
+import { UrlContext } from "../App";
 
 function ImagesPage() {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -28,6 +27,8 @@ function ImagesPage() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const url = useContext(UrlContext);
 
   function loadCategory() {
     axios
@@ -51,7 +52,7 @@ function ImagesPage() {
 
   useEffect(() => {
     if (!category) loadCategory();
-  }, []);
+  });
 
   useEffect(() => {
     setThumbnailWidth(
@@ -66,12 +67,49 @@ function ImagesPage() {
         url + "/images/0x0/" + category.images[urlPhotoId].fullpath,
       );
     }
-  }, [urlPhotoId, category]);
+  }, [url, urlPhotoId, category]);
 
   function handleShowPhoto(e, id) {
     navigate("/category/" + urlCategory + "/" + id, { replace: true });
     e.preventDefault();
   }
+
+  function handleOnPrevious() {
+    const id = parseInt(urlPhotoId) - 1;
+    if (category.images[id])
+      navigate("/category/" + urlCategory + "/" + id, {
+        replace: true,
+      });
+  }
+
+  function handleOnNext() {
+    const id = parseInt(urlPhotoId) + 1;
+    if (category.images[id])
+      navigate("/category/" + urlCategory + "/" + id, {
+        replace: true,
+      });
+  }
+
+  useEffect(() => {
+    function keyDownHandler(e) {
+      switch (e.key) {
+        case "ArrowLeft":
+          handleOnPrevious();
+          break;
+        case "ArrowRight":
+          handleOnNext();
+          break;
+        default:
+          break;
+      }
+    }
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  });
 
   return (
     <Gallery title="Fotogaléria" location={urlCategory} locationBackTo="/">
@@ -111,20 +149,8 @@ function ImagesPage() {
             setShowPhotoModal(false);
             navigate("/category/" + urlCategory, { replace: true });
           }}
-          onPrevious={() => {
-            const id = parseInt(urlPhotoId) - 1;
-            if (category.images[id])
-              navigate("/category/" + urlCategory + "/" + id, {
-                replace: true,
-              });
-          }}
-          onNext={() => {
-            const id = parseInt(urlPhotoId) + 1;
-            if (category.images[id])
-              navigate("/category/" + urlCategory + "/" + id, {
-                replace: true,
-              });
-          }}
+          onPrevious={handleOnPrevious}
+          onNext={handleOnNext}
           hasNext={() => {
             const id = parseInt(urlPhotoId) + 1;
             return !!category.images[id];

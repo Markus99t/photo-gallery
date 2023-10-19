@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Gallery from "../components/Gallery";
 import Card from "../components/Card";
 import ModalAddCategory from "../components/modal/AddCategory";
@@ -6,8 +6,7 @@ import axios from "axios";
 import { AddIcon } from "../components/Icon";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategories, setCategory } from "../utils/redux/gallerySlice";
-
-const url = "http://api.programator.sk";
+import { UrlContext } from "../App";
 
 function CategoryPage() {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -23,6 +22,8 @@ function CategoryPage() {
   const categoryListComplete = useSelector(
     (state) => state.galleryReducer.categoryListComplete,
   );
+
+  const url = useContext(UrlContext);
 
   function loadCategories() {
     axios
@@ -52,8 +53,11 @@ function CategoryPage() {
   }
 
   useEffect(() => {
-    if (!categoryListComplete) loadCategories();
-    else categoryIds.forEach((id) => loadCategory(id));
+    if (!categoryListComplete) {
+      loadCategories();
+    } else {
+      categoryIds.forEach((id) => loadCategory(id));
+    }
   }, [categoryListComplete]);
 
   useEffect(() => {

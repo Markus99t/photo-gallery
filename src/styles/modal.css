@@ -30,13 +30,26 @@
   right: 0.2rem;
 }
 .modal .modal-container .modal-photo-previous {
+  background-color: #ffffff;
   position: fixed;
   top: 50%;
+  left: 1rem;
+  padding: 12px;
+}
+.modal .modal-container .modal-photo-previous:hover {
+  left: 0.5rem;
+  transition: left 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .modal .modal-container .modal-photo-next {
+  background-color: #ffffff;
   position: fixed;
-  right: 0;
   top: 50%;
+  right: 1rem;
+  padding: 12px;
+}
+.modal .modal-container .modal-photo-next:hover {
+  right: 0.5rem;
+  transition: right 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .modal .modal-template {
   padding: 1rem;

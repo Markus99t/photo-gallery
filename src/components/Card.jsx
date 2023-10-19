@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../styles/card.scss";
-
-const url = "http://api.programator.sk";
+import { useContext } from "react";
+import { UrlContext } from "../App";
 
 function Card({
   id,
@@ -15,6 +15,8 @@ function Card({
   onClick,
   width,
 }) {
+  const url = useContext(UrlContext);
+
   function handleOnClick(e) {
     if (onClick) {
       onClick(e, id);

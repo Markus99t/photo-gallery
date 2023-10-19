@@ -3,8 +3,8 @@ import Modal from "../Modal";
 import "../../styles/modal/photo.scss";
 import { IconButton } from "@mui/material";
 
-import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
+import ArrowLeft from "@mui/icons-material/ArrowBackIosNew";
+import ArrowRight from "@mui/icons-material/ArrowForwardIos";
 
 function Photo({
   open,
@@ -20,12 +20,12 @@ function Photo({
       <img src={image} alt="" className="modal-photo" />
       {hasPrevious() && (
         <IconButton className="modal-photo-previous" onClick={onPrevious}>
-          <ArrowCircleLeftIcon fontSize="large" />
+          <ArrowLeft fontSize="small" />
         </IconButton>
       )}
       {hasNext() && (
         <IconButton className="modal-photo-next" onClick={onNext}>
-          <ArrowCircleRightIcon fontSize="large" />
+          <ArrowRight fontSize="small" />
         </IconButton>
       )}
     </Modal>

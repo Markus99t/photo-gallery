@@ -1,3 +1,5 @@
+@use "./variables.scss" as *;
+
 .modal {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   background-color: white;
@@ -34,14 +36,29 @@
     }
 
     .modal-photo-previous {
+      background-color: $color-bg-light-strong;
       position: fixed;
-      top: 50%
+      top: 50%;
+      left: 1rem;
+      padding: 12px;
+
+      &:hover {
+        left: .5rem;
+        transition: left $hover-transition-style;
+      }
     }
 
     .modal-photo-next {
+      background-color: $color-bg-light-strong;
       position: fixed;
-      right: 0;
-      top: 50%
+      top: 50%;
+      right: 1rem;
+      padding: 12px;
+
+      &:hover {
+        right: .5rem;
+        transition: right $hover-transition-style;
+      }
     }
   }
 

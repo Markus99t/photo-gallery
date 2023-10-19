@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Modal, { ModalTemplate } from "../Modal";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -7,8 +7,7 @@ import InputButton from "../inputs/InputButton";
 import "../../styles/modal/addPhoto.scss";
 import InputDragNDrop from "../inputs/InputDragNDrop";
 import { Alert } from "@mui/material";
-
-const url = "http://api.programator.sk";
+import { UrlContext } from "../../App";
 
 function AddPhoto({ open, onClose, onAdded }) {
   const [files, setFiles] = useState([]);
@@ -16,6 +15,8 @@ function AddPhoto({ open, onClose, onAdded }) {
   const [showError, setShowError] = useState(false);
 
   const { category: urlCategory } = useParams();
+
+  const url = useContext(UrlContext);
 
   function onFiles(files) {
     setFiles(files);
@@ -72,6 +73,8 @@ function AddPhoto({ open, onClose, onAdded }) {
           case 404:
             setError("Kategóriu sa nepodarilo nájsť.");
             setShowError(true);
+            break;
+          default:
             break;
         }
       }),

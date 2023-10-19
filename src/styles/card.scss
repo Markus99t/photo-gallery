@@ -33,6 +33,8 @@
   box-shadow: 0 4px 24px #00000014;
   overflow: hidden;
 
+  transition: top $hover-transition-style;
+
   &.--action {
     &:hover {
       top: 0;
