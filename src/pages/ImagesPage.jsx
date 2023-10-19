@@ -10,6 +10,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../utils/redux/gallerySlice";
 import { UrlContext } from "../App";
+import Header from "../components/Header";
 
 function ImagesPage() {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -112,56 +113,59 @@ function ImagesPage() {
   });
 
   return (
-    <Gallery title="Fotogaléria" location={urlCategory} locationBackTo="/">
-      {category &&
-        category.images &&
-        category.images.map((image, i) => (
-          <Card
-            key={i}
-            id={i}
-            image={image}
-            width={thumbnailWidth}
-            onClick={handleShowPhoto}
+    <div className="gallery-container">
+      <Header title="Fotogaléria" location={urlCategory} locationBackTo="/" />
+      <Gallery>
+        {category &&
+          category.images &&
+          category.images.map((image, i) => (
+            <Card
+              key={i}
+              id={i}
+              image={image}
+              width={thumbnailWidth}
+              onClick={handleShowPhoto}
+            />
+          ))}
+        <Card
+          onClick={() => {
+            setShowAddModal(true);
+          }}
+          actionName={"Pridať fotky"}
+          actionIcon={<AddCircleOutlineRoundedIcon />}
+        />
+        <div ref={itemWidthRef}></div>
+        {showAddModal && (
+          <ModalAddPhoto
+            open={showAddModal}
+            onClose={() => setShowAddModal(false)}
+            onAdded={() => {
+              loadCategory();
+            }}
           />
-        ))}
-      <Card
-        onClick={() => {
-          setShowAddModal(true);
-        }}
-        actionName={"Pridať fotky"}
-        actionIcon={<AddCircleOutlineRoundedIcon />}
-      />
-      <div ref={itemWidthRef}></div>
-      {showAddModal && (
-        <ModalAddPhoto
-          open={showAddModal}
-          onClose={() => setShowAddModal(false)}
-          onAdded={() => {
-            loadCategory();
-          }}
-        />
-      )}
-      {showPhotoModal && (
-        <ModalPhoto
-          image={modalImageUrl}
-          open={showPhotoModal}
-          onClose={() => {
-            setShowPhotoModal(false);
-            navigate("/category/" + urlCategory, { replace: true });
-          }}
-          onPrevious={handleOnPrevious}
-          onNext={handleOnNext}
-          hasNext={() => {
-            const id = parseInt(urlPhotoId) + 1;
-            return !!category.images[id];
-          }}
-          hasPrevious={() => {
-            const id = parseInt(urlPhotoId) - 1;
-            return !!category.images[id];
-          }}
-        />
-      )}
-    </Gallery>
+        )}
+        {showPhotoModal && (
+          <ModalPhoto
+            image={modalImageUrl}
+            open={showPhotoModal}
+            onClose={() => {
+              setShowPhotoModal(false);
+              navigate("/category/" + urlCategory, { replace: true });
+            }}
+            onPrevious={handleOnPrevious}
+            onNext={handleOnNext}
+            hasNext={() => {
+              const id = parseInt(urlPhotoId) + 1;
+              return !!category.images[id];
+            }}
+            hasPrevious={() => {
+              const id = parseInt(urlPhotoId) - 1;
+              return !!category.images[id];
+            }}
+          />
+        )}
+      </Gallery>
+    </div>
   );
 }
 

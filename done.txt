@@ -8,7 +8,7 @@
 
 ✅ "Spracovaná chyba, hoci pre používateľa “Error_409” asi veľmi neznamená"
     - Keď som spracovával tú chybu, tiež som sa nad tým pozastavil, že pre používateľa to bude irelevantná informácia.
-    - Dal som to preč.
+    - Dal som to už preč.
 
 ✅ "Skús do projektu pridať viac animácií. Niektoré elementy “skáču”."
     - Elementy by mali mať teraz jemnejšiu animáciu.
@@ -24,4 +24,7 @@
     - Vytvoril som preňho Context v rodičovi App.jsx a pomocou useContext k nemu pristupujem v childoch.
 
 ❌ "Niektoré hooky na sebe majú warningy z eslint. Prosím, pozri sa na ne."
-    - Hook useEffect, ktorý na 61. riadku v CategoryPage.jsx hlási eslint warning, chcem aby sa re-runol zakaždým keď sa dokončí načítavanie categórií. Preto v dependency array mám len stav categoryListComplete. Avšak eslintu sa to nepáči, netuším prečo. Aký je možný fix?
+    - Hook useEffect, ktorý na 63. riadku v CategoryPage.jsx hlási eslint warning, chcem aby sa re-runol zakaždým keď sa dokončí načítavanie categórií. Preto v dependency array mám len stav categoryListComplete. Avšak eslintu sa to nepáči, netuším prečo. Aký je možný fix?
+
+[Vlastná bonusová funkcionalita]
+    - Galériu som rozšíril o možnosť vyhľadávania kategórie pomocou search baru

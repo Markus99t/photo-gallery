@@ -1,0 +1,48 @@
+.gallery-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0 2.4rem;
+}
+.gallery-header .search {
+  display: flex;
+  align-items: flex-end;
+}
+.gallery-header h1 {
+  color: inherit;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 1.71rem;
+  margin: 1.2em 0;
+  color: #000000;
+}
+.gallery-header h2 {
+  color: inherit;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0.7em 0;
+  color: #000000;
+  margin: 0;
+}
+.gallery-header nav {
+  display: inline-block;
+}
+.gallery-header nav a {
+  display: flex;
+  align-items: center;
+}
+.gallery-header nav a:focus-visible {
+  outline: none;
+  border-radius: 0.3em;
+  box-shadow: 0 0 0 0.2rem rgba(3, 102, 214, 0.2);
+}
+.gallery-header nav .icon {
+  color: #000000;
+  margin-right: 1em;
+  width: 1.25em;
+}
+
+/*# sourceMappingURL=header.css.map */

@@ -7,10 +7,12 @@ import { AddIcon } from "../components/Icon";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategories, setCategory } from "../utils/redux/gallerySlice";
 import { UrlContext } from "../App";
+import Header from "../components/Header";
 
 function CategoryPage() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [thumbnailWidth, setThumbnailWidth] = useState(null);
+  const [filteredCategories, setFilteredCategories] = useState([]);
   const itemWidthRef = useRef();
 
   const dispatch = useDispatch();
@@ -75,42 +77,62 @@ function CategoryPage() {
     }
   }
 
+  useEffect(() => {
+    setFilteredCategories(categoryIds);
+  }, [categoryIds]);
+
+  function onSearchTextUpdate(value) {
+    setFilteredCategories(
+      categoryIds.filter((el) => {
+        return el.toLowerCase().includes(value);
+      }),
+    );
+  }
+
   return (
-    <Gallery title="Fotogaléria" location="Kategórie">
-      {categoryIds.map((id, i) => {
-        return (
-          <Card
-            key={i}
-            linkTo={"/category/" + categoryList[id].path}
-            name={categoryList[id].name}
-            description={
-              categoryList[id].images !== undefined
-                ? getCategoryLength(categoryList[id].images.length)
-                : null
-            }
-            image={categoryList[id].image}
-            width={thumbnailWidth}
-          />
-        );
-      })}
-      <Card
-        onClick={() => {
-          setShowAddModal(true);
-        }}
-        actionName={"Pridať kategóriu"}
-        actionIcon={<AddIcon />}
+    <div className="gallery-container">
+      <Header
+        title="Fotogaléria"
+        location="Kategórie"
+        searchBar
+        onInputUpdate={onSearchTextUpdate}
       />
-      <div ref={itemWidthRef}></div>
-      {showAddModal && (
-        <ModalAddCategory
-          open={showAddModal}
-          onClose={() => setShowAddModal(false)}
-          onAdded={() => {
-            loadCategories();
+      <Gallery>
+        {filteredCategories.map((id, i) => {
+          return (
+            <Card
+              key={i}
+              linkTo={"/category/" + categoryList[id].path}
+              name={categoryList[id].name}
+              description={
+                categoryList[id].images !== undefined
+                  ? getCategoryLength(categoryList[id].images.length)
+                  : null
+              }
+              image={categoryList[id].image}
+              width={thumbnailWidth}
+            />
+          );
+        })}
+        <Card
+          onClick={() => {
+            setShowAddModal(true);
           }}
+          actionName={"Pridať kategóriu"}
+          actionIcon={<AddIcon />}
         />
-      )}
-    </Gallery>
+        <div ref={itemWidthRef}></div>
+        {showAddModal && (
+          <ModalAddCategory
+            open={showAddModal}
+            onClose={() => setShowAddModal(false)}
+            onAdded={() => {
+              loadCategories();
+            }}
+          />
+        )}
+      </Gallery>
+    </div>
   );
 }
 

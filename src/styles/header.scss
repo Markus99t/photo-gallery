@@ -1,0 +1,39 @@
+@use "./variables.scss" as *;
+
+.gallery-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0 2.4rem;
+
+  .search {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  h1 {
+    @include text-style-header;
+    color: $color-text-dark-strong;
+  }
+
+  h2 {
+    @include text-style-normal;
+    color: $color-text-dark-strong;
+    margin: 0;
+  }
+
+  nav {
+    display: inline-block;
+
+    a {
+      @include input-focus;
+      display: flex;
+      align-items: center;
+    }
+
+    .icon {
+      color: $color-text-dark-strong;
+      margin-right: 1em;
+      width: 1.25em;
+    }
+  }
+}
