@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from "../Modal";
 import "../../styles/modal/photo.scss";
 import { IconButton } from "@mui/material";
@@ -15,6 +15,27 @@ function Photo({
   hasPrevious,
   hasNext,
 }) {
+  useEffect(() => {
+    function keyDownHandler(e) {
+      switch (e.key) {
+        case "ArrowLeft":
+          onPrevious();
+          break;
+        case "ArrowRight":
+          onNext();
+          break;
+        default:
+          break;
+      }
+    }
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  });
+
   return (
     <Modal open={open} onClose={onClose}>
       <img src={image} alt="" className="modal-photo" />

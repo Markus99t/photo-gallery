@@ -1,6 +1,7 @@
 .card-container {
   position: relative;
   display: block;
+  aspect-ratio: 1/1;
 }
 .card-container:focus-visible {
   outline: none;

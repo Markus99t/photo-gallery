@@ -62,13 +62,37 @@ function ImagesPage() {
   }, []);
 
   useEffect(() => {
+    function loadImage(image) {
+      return new Promise((resolve, reject) => {
+        const loadImg = new Image();
+        loadImg.src = image;
+        loadImg.onload = () => resolve(image);
+        loadImg.onerror = (err) => {
+          console.log(err);
+          reject(err);
+        };
+      });
+    }
+
+    Promise.all(
+      category?.images.map((image) =>
+        loadImage(url + "/images/0x0/" + image.fullpath),
+      ),
+    )
+      .then()
+      .catch((err) => {
+        console.error("Failed to load images.\n", err);
+      });
+  }, [category?.images, url]);
+
+  useEffect(() => {
     if (urlPhotoId !== undefined && category?.images[urlPhotoId]) {
       setShowPhotoModal(true);
       setModalImageUrl(
         url + "/images/0x0/" + category.images[urlPhotoId].fullpath,
       );
     }
-  }, [url, urlPhotoId, category]);
+  }, [urlPhotoId, category, url]);
 
   function handleShowPhoto(e, id) {
     navigate("/category/" + urlCategory + "/" + id, { replace: true });
@@ -90,27 +114,6 @@ function ImagesPage() {
         replace: true,
       });
   }
-
-  useEffect(() => {
-    function keyDownHandler(e) {
-      switch (e.key) {
-        case "ArrowLeft":
-          handleOnPrevious();
-          break;
-        case "ArrowRight":
-          handleOnNext();
-          break;
-        default:
-          break;
-      }
-    }
-
-    document.addEventListener("keydown", keyDownHandler);
-
-    return () => {
-      document.removeEventListener("keydown", keyDownHandler);
-    };
-  });
 
   return (
     <div className="gallery-container">

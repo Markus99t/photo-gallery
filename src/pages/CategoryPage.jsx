@@ -60,6 +60,7 @@ function CategoryPage() {
     } else {
       categoryIds.forEach((id) => loadCategory(id));
     }
+    // eslint-disable-next-line
   }, [categoryListComplete]);
 
   useEffect(() => {

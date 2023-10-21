@@ -1,30 +1,46 @@
-[UI/UX]
-❌ "Keď sa mení rozlíšenie, mení sa aj pomer strán fotiek. Pri rôznych rozlíšeniach tak vidno inú časť obrázka."
-    - Riešil som to cez object-fit: cover.
-    - Nenapadá mi iné riešenie. Vedel by si mi prosím poradiť?
+1. Oprava
+    [UI/UX]
+    ❌ "Keď sa mení rozlíšenie, mení sa aj pomer strán fotiek. Pri rôznych rozlíšeniach tak vidno inú časť obrázka."
+        - Riešil som to cez object-fit: cover.
+        - Nenapadá mi iné riešenie. Vedel by si mi prosím poradiť?
 
-✅ "Vedel by si to urobiť tak, aby sa detaily fotiek dali preklikávať pomocou kurzorových šípok?"
-    - Spravené, neviem ako som na to mohol zabudnúť...
+    ✅ "Vedel by si to urobiť tak, aby sa detaily fotiek dali preklikávať pomocou kurzorových šípok?"
+        - Spravené, neviem ako som na to mohol zabudnúť...
 
-✅ "Spracovaná chyba, hoci pre používateľa “Error_409” asi veľmi neznamená"
-    - Keď som spracovával tú chybu, tiež som sa nad tým pozastavil, že pre používateľa to bude irelevantná informácia.
-    - Dal som to už preč.
+    ✅ "Spracovaná chyba, hoci pre používateľa “Error_409” asi veľmi neznamená"
+        - Keď som spracovával tú chybu, tiež som sa nad tým pozastavil, že pre používateľa to bude irelevantná informácia.
+        - Dal som to už preč.
 
-✅ "Skús do projektu pridať viac animácií. Niektoré elementy “skáču”."
-    - Elementy by mali mať teraz jemnejšiu animáciu.
+    ✅ "Skús do projektu pridať viac animácií. Niektoré elementy “skáču”."
+        - Elementy by mali mať teraz jemnejšiu animáciu.
 
-✅ "Šípky v lightboxe nevidno ak sú na tmavom pozadí."
-    - Pridal som na tlačidlo svetlejšie pozadie a animáciu
+    ✅ "Šípky v lightboxe nevidno ak sú na tmavom pozadí."
+        - Pridal som na tlačidlo svetlejšie pozadie a animáciu
 
-[Kód]
-✅ "Po spustení je v konzole mnoho chýb."
-    - Už by to malo byť clean, až teda na jeden warning, ktorý opíšem nižšie.
+    [Kód]
+    ✅ "Po spustení je v konzole mnoho chýb."
+        - Už by to malo byť clean, až teda na jeden warning, ktorý opíšem nižšie.
 
-✅ "Reťazec “http://api.programator.sk/” je v projekte niekoľkokrát. Mal by tam byť len raz."
-    - Vytvoril som preňho Context v rodičovi App.jsx a pomocou useContext k nemu pristupujem v childoch.
+    ✅ "Reťazec “http://api.programator.sk/” je v projekte niekoľkokrát. Mal by tam byť len raz."
+        - Vytvoril som preňho Context v rodičovi App.jsx a pomocou useContext k nemu pristupujem v childoch.
 
-❌ "Niektoré hooky na sebe majú warningy z eslint. Prosím, pozri sa na ne."
-    - Hook useEffect, ktorý na 63. riadku v CategoryPage.jsx hlási eslint warning, chcem aby sa re-runol zakaždým keď sa dokončí načítavanie categórií. Preto v dependency array mám len stav categoryListComplete. Avšak eslintu sa to nepáči, netuším prečo. Aký je možný fix?
+    ❌ "Niektoré hooky na sebe majú warningy z eslint. Prosím, pozri sa na ne."
+        - Hook useEffect, ktorý na 63. riadku v CategoryPage.jsx hlási eslint warning, chcem aby sa re-runol zakaždým keď sa dokončí načítavanie categórií. Preto v dependency array mám len stav categoryListComplete. Avšak eslintu sa to nepáči, netuším prečo. Aký je možný fix?
 
-[Vlastná bonusová funkcionalita]
-    - Galériu som rozšíril o možnosť vyhľadávania kategórie pomocou search baru
+    [Vlastná bonusová funkcionalita]
+        - Galériu som rozšíril o možnosť vyhľadávania kategórie pomocou search baru
+
+2. Oprava
+    [UI/UX]
+    ✅ "Keď sa mení rozlíšenie, mení sa aj pomer strán fotiek. Pri rôznych rozlíšeniach tak vidno inú časť obrázka."
+        - Vyriešil som to cez aspect-ratio: 1/1
+
+    ✅ "Preklikávanie detailu obrázka pomocou kurzorových šípok je pomalé. Aj keď sú fotky už načítané, preklik na ďalšiu fotku trvá asi 0,5s."
+        - Riešil som to tým spôsobom, že po kliknutí na kategóriu sa najrpv preloadnu do cache pamäťe obrázky v plnej kvalite, že keď sa vyberie obrázok na prezeranie, tak už je načítaný a dá sa hneď prechádzať na ďalší resp. predošlý obrázok bez nejakého delayu. Nie som si istý či tento spôsob riešenia vyriešil túto pripomienku.
+        - Avšak po čase sa obrázky musia znova reloadnuť, čo zase spôsobý menší delay pri prechádzaní. No to už netuším prečo, keďže obrázky by mali byť cachnuté browserom. Tetoval som to v prehliadačoch ako Safari a Chrome. K tomuto problému dochádza len pri Chrome, čo som si všimol.
+
+    [Kód]
+    ✅ "Po spustení opäť chyby v konzole."
+        - Na iné riešenie nedokážem prísť, ako len pridať // eslint-disable-next-line o riadok vyššie.
+        - Skúšal som použiť useCallback pre memoizáciu na funkciach loadCategory a loadCategories, ako si spomínal, lenže to viedlo k infinite re-runovaniu.
+        - A definovanie funkcií v rámci bloku useEffect nemôžem, keďže funkcie používam aj inkde v rámci komponentu.
